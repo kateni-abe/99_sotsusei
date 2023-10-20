@@ -103,7 +103,9 @@ export default function Login({ status, canResetPassword }) {
                         ログイン
                     </PrimaryButton>
                     <CancelButton className="ml-4" disabled={processing}>
-                        <a href="/project">キャンセル</a>
+                        <a href="https://hitotonari.sakura.ne.jp/project">
+                            キャンセル
+                        </a>
                     </CancelButton>
                 </div>
             </form>
