@@ -40,7 +40,7 @@ function MakeFriends({ user, auth }) {
                 </button>
             )}
             {/* <button onClick={handleClose}>閉じる</button> */}
-            <a href="/project">閉じる</a>
+            <a href="/project/dashboard">閉じる</a>
         </div>
     );
 }
