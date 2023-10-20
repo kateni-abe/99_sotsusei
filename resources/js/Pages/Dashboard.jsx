@@ -59,8 +59,12 @@ export default function dashboard({ auth, userDetails = {} }) {
     const userURL = `${window.location.origin}/project/user/${auth.user.unique_token}`;
 
     const copyToClipboard = (url) => {
-        navigator.clipboard.writeText(url);
-        alert("マイカードリンクがクリップボードにコピーされました!");
+        try {
+            navigator.clipboard.writeText(url);
+            alert("マイカードリンクがクリップボードにコピーされました!");
+        } catch (error) {
+            console.error("クリップボードへのコピーに失敗しました:", error);
+        }
     };
 
     return (
