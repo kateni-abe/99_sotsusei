@@ -120,7 +120,7 @@ export default function Register() {
                         登 録
                     </PrimaryButton>
                     <CancelButton className="ml-4" disabled={processing}>
-                        <a href="/">キャンセル</a>
+                        <a href="/project">キャンセル</a>
                     </CancelButton>
                 </div>
             </form>
