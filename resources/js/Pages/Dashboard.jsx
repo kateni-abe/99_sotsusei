@@ -59,12 +59,8 @@ export default function dashboard({ auth, userDetails = {} }) {
     const userURL = `${window.location.origin}/project/user/${auth.user.unique_token}`;
 
     const copyToClipboard = (url) => {
-        try {
-            navigator.clipboard.writeText(url);
-            alert("マイカードリンクがクリップボードにコピーされました!");
-        } catch (error) {
-            console.error("クリップボードへのコピーに失敗しました:", error);
-        }
+        navigator.clipboard.writeText(url);
+        alert("マイカードリンクがクリップボードにコピーされました!");
     };
 
     return (
@@ -173,7 +169,7 @@ export default function dashboard({ auth, userDetails = {} }) {
                                 <div className="p-6 text-gray-900 flex flex-col items-center">
                                     <QRCode value={userURL} size={128} />
                                     {/* QRコードに含まれるリンク情報の表示エリア */}
-                                    <div className="mt-4 text-center">
+                                    {/* <div className="mt-4 text-center">
                                         <BlackButton
                                             variant="contained"
                                             onClick={() =>
@@ -182,7 +178,7 @@ export default function dashboard({ auth, userDetails = {} }) {
                                         >
                                             マイカードリンクをコピー
                                         </BlackButton>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
