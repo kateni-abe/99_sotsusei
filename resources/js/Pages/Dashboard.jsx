@@ -55,7 +55,8 @@ export default function dashboard({ auth, userDetails = {} }) {
 
     const hasPublicDetails = publicDetailsKeys.length > 0;
 
-    const userURL = `${window.location.origin}/user/${auth.user.unique_token}`;
+    //QRコードのURL
+    const userURL = `${window.location.origin}/project/user/${auth.user.unique_token}`;
 
     const copyToClipboard = (url) => {
         navigator.clipboard.writeText(url);
