@@ -77,7 +77,7 @@ export default function UpdateUserDetailsForm({ className = "" }) {
                 {/* 各種情報入力フィールドを作成します */}
 
                 {/* ユーザーアイコン */}
-                <div>
+                {/* <div>
                     <InputLabel htmlFor="icon" value="ユーザーアイコン" />
                     <TextInput
                         id="icon"
@@ -96,7 +96,7 @@ export default function UpdateUserDetailsForm({ className = "" }) {
                         label="公開"
                     />
                     <InputError message={errors.icon} className="mt-2" />
-                </div>
+                </div> */}
 
                 {/* 生年月日 */}
                 <div>
