@@ -1,11 +1,10 @@
-// resources/js/Pages/FriendsList.jsx
 import React, { useState } from "react";
 
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
 const BlackButton = styled(Button)({
-    color: "white", // ボタンの文字の色を白に
+    color: "white",
     boxShadow: "none",
     textTransform: "none",
     borderRadius: 8,
@@ -41,7 +40,15 @@ const BlackButton = styled(Button)({
 
 function FriendsList({ friends }) {
     return (
-        <div>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100vh",
+            }}
+        >
             <h1>友達一覧</h1>
             <ul>
                 {friends.map((friend) => (
