@@ -3,6 +3,7 @@
 // コントローラーインポート
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SendcardController;
 use App\Http\Controllers\UserDetailsController;
 
 
@@ -64,6 +65,10 @@ Route::get('/mycard', function () {
 ->name('mycard');
 
 Route::get('/users', [UsersController::class, 'index']);
+
+// routes/web.php
+Route::get('/project/users', [SendcardController::class, 'show'])->name('sendcard.show');
+
 
 
 

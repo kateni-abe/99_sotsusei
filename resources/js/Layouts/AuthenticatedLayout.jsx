@@ -76,14 +76,21 @@ export default function Authenticated({ user, header, children }) {
                                         >
                                             マイカード
                                         </Dropdown.Link>
+                                        <Dropdown.Link href="/project/users">
+                                            マイカードを渡す
+                                        </Dropdown.Link>
+
+                                        <Dropdown.Link
+                                            href={route("sendcard.show")}
+                                        >
+                                            マイカードを渡すべ
+                                        </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("profile.edit")}
                                         >
                                             プロフィールを編集
                                         </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route("users.index")}
-                                        >
+                                        <Dropdown.Link href="/project/users">
                                             ユーザー一覧
                                         </Dropdown.Link>
                                         <Dropdown.Link
@@ -155,7 +162,7 @@ export default function Authenticated({ user, header, children }) {
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
-                            Dashboard
+                            マイカード
                         </ResponsiveNavLink>
                     </div>
 
@@ -172,14 +179,14 @@ export default function Authenticated({ user, header, children }) {
                         <div className="mt-3 space-y-1">
                             {/** プロフィールとログアウトリンク */}
                             <ResponsiveNavLink href={route("profile.edit")}>
-                                Profile
+                                プロフィールを編集
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
                                 href={route("logout")}
                                 as="button"
                             >
-                                Log Out
+                                ログアウト
                             </ResponsiveNavLink>
                         </div>
                     </div>

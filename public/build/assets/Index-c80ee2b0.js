@@ -1,1 +1,0 @@
-import{j as i}from"./app-e214c10f.js";function r({users:e}){return i.jsxs("div",{children:[i.jsx("h1",{children:"Users List"}),i.jsx("ul",{children:e.map(s=>i.jsx("li",{children:s.name},s.id))})]})}export{r as default};
