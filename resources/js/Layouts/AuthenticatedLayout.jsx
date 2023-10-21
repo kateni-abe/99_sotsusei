@@ -81,10 +81,8 @@ export default function Authenticated({ user, header, children }) {
                                         >
                                             プロフィールを編集
                                         </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route("user-search.index")}
-                                        >
-                                            友達検索
+                                        <Dropdown.Link href="/project/users">
+                                            ユーザー一覧
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("logout")}

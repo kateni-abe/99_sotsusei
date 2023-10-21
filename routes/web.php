@@ -7,7 +7,7 @@ use App\Http\Controllers\UserDetailsController;
 
 
 // アプリケーション基本クラス
-use App\Http\Controllers\UserSearchController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Application;
 use App\Models\User;
 
@@ -63,9 +63,7 @@ Route::get('/mycard', function () {
 // ルート名指定
 ->name('mycard');
 
-
-Route::get('/user-search', [UserSearchController::class, 'index'])->name('user-search.index');
-Route::post('/user-search', [UserSearchController::class, 'search'])->name('user-search.search');
+Route::get('/users', [UsersController::class, 'index']);
 
 
 
