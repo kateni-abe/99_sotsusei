@@ -66,9 +66,31 @@ function Index({ users }) {
             >
                 ユーザー一覧
             </Typography>
-            <ul>
+            {/* <ul>
                 {users.map((user) => (
                     <li key={user.id}>{user.name}</li>
+                ))}
+            </ul> */}
+            <ul>
+                {users.map((user) => (
+                    <li key={user.id}>
+                        {user.name}
+                        {user.isFollowing ? (
+                            <Button
+                                color="default"
+                                onClick={() => handleUnfollow(user.id)}
+                            >
+                                友達をやめる
+                            </Button>
+                        ) : (
+                            <Button
+                                color="primary"
+                                onClick={() => handleFollow(user.id)}
+                            >
+                                友達になる
+                            </Button>
+                        )}
+                    </li>
                 ))}
             </ul>
             {/* ボタンエリア */}
