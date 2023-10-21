@@ -1,15 +1,13 @@
 <?php
 
-// コントローラーインポートだよ
+// コントローラーインポート
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FriendsListController;
-use App\Http\Controllers\MakeFriendsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserDetailsController;
-use App\Http\Controllers\FollowController;
 
 
 // アプリケーション基本クラス
+use App\Http\Controllers\UserSearchController;
 use Illuminate\Foundation\Application;
 use App\Models\User;
 
@@ -66,10 +64,12 @@ Route::get('/mycard', function () {
 ->name('mycard');
 
 
-// Route::get('/user/{token}', function ($token) {
-//     $user = User::where('unique_token', $token)->with('userDetails')->firstOrFail();  // userDetails関連を含める
-//     return Inertia::render('MakeFriends', ['user' => $user, 'userDetails' => $user->userDetails]);
-// });
+Route::get('/user-search', [UserSearchController::class, 'index'])->name('user-search.index');
+Route::post('/user-search', [UserSearchController::class, 'search'])->name('user-search.search');
+
+
+
+
 
 
 /*
