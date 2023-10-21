@@ -59,14 +59,16 @@ export default function dashboard({ auth, userDetails = {} }) {
     const userURL = `${window.location.origin}/project/user/${auth.user.unique_token}`;
 
     const copyToClipboard = (url) => {
-        navigator.clipboard.writeText(url)
-        .then(() => {
-            alert("マイカードリンクがクリップボードにコピーされました!");
-        })
-        .catch(err => {
-            console.error('Failed to copy text: ', err);
-            alert("エラーが発生しました。もう一度お試しください。");
-        });
+        navigator.clipboard
+            .writeText(url)
+            .then(() => {
+                alert("マイカードリンクがクリップボードにコピーされました!");
+            })
+            .catch((err) => {
+                console.error("Failed to copy text: ", err);
+                alert("エラーが発生しました。もう一度お試しください。");
+            });
+    };
 
     return (
         // AuthenticatedLayoutコンポーネントを使用して、
