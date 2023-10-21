@@ -77,16 +77,6 @@ export default function Authenticated({ user, header, children }) {
                                             プロフィールを編集
                                         </Dropdown.Link>
                                         <Dropdown.Link
-                                            href={route("friendslist.index")}
-                                        >
-                                            友達一覧
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route("friendslist.index")}
-                                        >
-                                            友達をさがす
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
                                             as="button"

@@ -71,16 +71,6 @@ Route::get('/mycard', function () {
 //     return Inertia::render('MakeFriends', ['user' => $user, 'userDetails' => $user->userDetails]);
 // });
 
-Route::get('/user/{token}', [MakeFriendsController::class, 'show']);
-
-
-Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
-Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
-
-
-Route::get('/friendslist', [FriendsListController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('friendslist.index');
 
 /*
 ルート定義解説:
