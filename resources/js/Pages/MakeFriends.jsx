@@ -1,10 +1,10 @@
-// resources/js/Pages/MakeFriends.jsx
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
 const BlackButton = styled(Button)({
+    color: "white", // ボタンの文字の色を白にする
     boxShadow: "none",
     textTransform: "none",
     borderRadius: 8,
@@ -43,9 +43,6 @@ function MakeFriends({ user, auth }) {
         user.is_followed_by_current_user
     );
 
-    // ここでuserオブジェクトからuserDetailsを取得します。
-    const userDetails = user.userDetails || {};
-
     const handleFollow = () => {
         Inertia.post(`/follow/${user.id}`);
         setIsFollowing(true);
@@ -72,9 +69,16 @@ function MakeFriends({ user, auth }) {
                 );
             })}
 
-            {auth.user ? (
-                <div>
-                    {isFollowing ? (
+            {/* ボタンのエリアをflexboxで囲む */}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                }}
+            >
+                {auth.user ? (
+                    isFollowing ? (
                         <BlackButton onClick={handleUnfollow}>
                             友達をやめる
                         </BlackButton>
@@ -82,14 +86,14 @@ function MakeFriends({ user, auth }) {
                         <BlackButton onClick={handleFollow}>
                             友達になる
                         </BlackButton>
-                    )}
-                </div>
-            ) : (
-                <BlackButton onClick={() => Inertia.visit("/login")}>
-                    ログインしてフォロー
-                </BlackButton>
-            )}
-            <BlackButton href="/project/dashboard">閉じる</BlackButton>
+                    )
+                ) : (
+                    <BlackButton onClick={() => Inertia.visit("/login")}>
+                        ログインしてフォロー
+                    </BlackButton>
+                )}
+                <BlackButton href="/project/dashboard">閉じる</BlackButton>
+            </div>
         </div>
     );
 }
