@@ -2,6 +2,7 @@
 
 // コントローラーインポート
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SendcardController;
 use App\Http\Controllers\UserDetailsController;
@@ -68,8 +69,7 @@ Route::get('/users', [UsersController::class, 'index']);
 
 Route::get('/send-card', [SendCardController::class, 'index'])->name('send-card');
 
-
-
+Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index')->middleware('auth');
 
 
 

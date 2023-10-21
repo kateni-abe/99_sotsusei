@@ -91,6 +91,11 @@ export default function Authenticated({ user, header, children }) {
                                             ユーザー一覧
                                         </Dropdown.Link>
                                         <Dropdown.Link
+                                            href={route("friends.index")}
+                                        >
+                                            友達一覧
+                                        </Dropdown.Link>
+                                        <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
                                             as="button"
