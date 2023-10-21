@@ -76,15 +76,12 @@ export default function Authenticated({ user, header, children }) {
                                         >
                                             マイカード
                                         </Dropdown.Link>
-                                        <Dropdown.Link href="/project/users">
+                                        <Dropdown.Link
+                                            href={route("send-card")}
+                                        >
                                             マイカードを渡す
                                         </Dropdown.Link>
 
-                                        <Dropdown.Link
-                                            href={route("sendcard.show")}
-                                        >
-                                            マイカードを渡すべ
-                                        </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route("profile.edit")}
                                         >
