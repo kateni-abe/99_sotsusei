@@ -2,6 +2,7 @@
 
 // コントローラーインポート
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SendcardController;
@@ -71,7 +72,11 @@ Route::get('/send-card', [SendCardController::class, 'index'])->name('send-card'
 
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index')->middleware('auth');
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
+    Route::delete('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');
+    // ... other routes
+});
 
 
 /*

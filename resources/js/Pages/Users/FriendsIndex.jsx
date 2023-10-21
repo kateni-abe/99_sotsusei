@@ -41,7 +41,7 @@ const BlackButton = styled(Button)({
     },
 });
 
-function Index({ users }) {
+function FriendsIndex({ users }) {
     return (
         // 追加: flex container を設定
         <div
@@ -91,4 +91,4 @@ function Index({ users }) {
     );
 }
 
-export default FriendIndex;
+export default FriendsIndex;

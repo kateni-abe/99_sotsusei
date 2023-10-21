@@ -33,10 +33,14 @@ class User extends Authenticatable
         return $this->hasOne(UserDetails::class);
     }
 
-    /**
-     * Get the users that the user is following.
-     */
+    public function followees()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id');
+    }
 
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id');
+    }
 
-    
     }
