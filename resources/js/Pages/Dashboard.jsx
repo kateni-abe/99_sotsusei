@@ -168,8 +168,8 @@ export default function dashboard({ auth, userDetails = {} }) {
                                 {/* QRコードエリア */}
                                 <div className="p-6 text-gray-900 flex flex-col items-center">
                                     <QRCode value={userURL} size={128} />
-                                    {/* QRコードに含まれるリンク情報の表示エリア */}
-                                    {/* <div className="mt-4 text-center">
+                                    {/* コピーボタン */}
+                                    <div className="mt-4 text-center">
                                         <BlackButton
                                             variant="contained"
                                             onClick={() =>
@@ -178,7 +178,7 @@ export default function dashboard({ auth, userDetails = {} }) {
                                         >
                                             マイカードリンクをコピー
                                         </BlackButton>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>
