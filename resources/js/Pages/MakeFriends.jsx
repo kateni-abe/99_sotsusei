@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
 const BlackButton = styled(Button)({
-    color: "white", // ボタンの文字の色を白にする
+    color: "white",
     boxShadow: "none",
     textTransform: "none",
     borderRadius: 8,
@@ -12,6 +12,9 @@ const BlackButton = styled(Button)({
     padding: "6px 30px",
     lineHeight: 1.5,
     backgroundColor: "black",
+    width: "12.5%",
+    margin: "0 auto",
+    display: "block",
     fontFamily: [
         "-apple-system",
         "BlinkMacSystemFont",
@@ -60,8 +63,15 @@ function MakeFriends({ user, auth }) {
     );
 
     return (
-        <div>
-            {/* Display User's Public Details */}
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100vh",
+            }}
+        >
             {publicDetailsKeys.map((key) => {
                 const detailKey = key.replace("_public", "");
                 return (
@@ -71,12 +81,14 @@ function MakeFriends({ user, auth }) {
                 );
             })}
 
-            {/* ボタンのエリアをflexboxで囲む */}
             <div
                 style={{
                     display: "flex",
                     flexDirection: "column",
                     gap: "10px",
+                    "@media (min-width: 768px)": {
+                        flexDirection: "row",
+                    },
                 }}
             >
                 {auth.user ? (
