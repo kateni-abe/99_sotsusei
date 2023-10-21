@@ -1,11 +1,11 @@
 // resources/js/Pages/FriendsList.jsx
 import React, { useState } from "react";
-import { Inertia } from "@inertiajs/inertia";
+
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
 const BlackButton = styled(Button)({
-    color: "white", // ボタンの文字の色を白にする
+    color: "white", // ボタンの文字の色を白に
     boxShadow: "none",
     textTransform: "none",
     borderRadius: 8,
