@@ -43,6 +43,8 @@ function MakeFriends({ user, auth }) {
         user.is_followed_by_current_user
     );
 
+    const userDetails = user.userDetails || {};
+
     const handleFollow = () => {
         Inertia.post(`/follow/${user.id}`);
         setIsFollowing(true);
