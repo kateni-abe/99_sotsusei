@@ -2,6 +2,7 @@
 
 // コントローラーインポートだよ
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FriendsListController;
 use App\Http\Controllers\MakeFriendsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserDetailsController;
@@ -76,6 +77,10 @@ Route::get('/user/{token}', [MakeFriendsController::class, 'show']);
 Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
 
+
+Route::get('/friendslist', [FriendsListController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('friendslist.index');
 
 /*
 ルート定義解説:
