@@ -12,7 +12,7 @@ const BlackButton = styled(Button)({
     padding: "6px 30px",
     lineHeight: 1.5,
     backgroundColor: "black",
-    width: "12.5%",
+    width: "100px",
     margin: "0 auto",
     display: "block",
     fontFamily: [
