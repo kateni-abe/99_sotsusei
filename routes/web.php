@@ -2,9 +2,11 @@
 
 // コントローラーインポートだよ
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MakeFriendsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserDetailsController;
 use App\Http\Controllers\FollowController;
+
 
 // アプリケーション基本クラス
 use Illuminate\Foundation\Application;
@@ -63,16 +65,16 @@ Route::get('/mycard', function () {
 ->name('mycard');
 
 
-Route::get('/user/{token}', function ($token) {
-    $user = User::where('unique_token', $token)->firstOrFail();
-    return Inertia::render('MakeFriends', ['user' => $user]);
-});
+// Route::get('/user/{token}', function ($token) {
+//     $user = User::where('unique_token', $token)->with('userDetails')->firstOrFail();  // userDetails関連を含める
+//     return Inertia::render('MakeFriends', ['user' => $user, 'userDetails' => $user->userDetails]);
+// });
+
+Route::get('/user/{token}', [MakeFriendsController::class, 'show']);
 
 
 Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
 Route::delete('/unfollow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
-
-
 
 
 /*
