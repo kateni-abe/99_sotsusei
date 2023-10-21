@@ -23,10 +23,16 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e) => {
         e.preventDefault();
+
+        // メールアドレスとパスワードのバリデーション
+        if (!data.email || !data.password) {
+            alert("情報に誤りがあります");
+            return;
+        }
+
         post(route("login"));
     };
 
-    // Eメールとパスワードが入力されているか確認
     const isButtonDisabled = !data.email || !data.password || processing;
 
     return (
@@ -38,7 +44,7 @@ export default function Login({ status, canResetPassword }) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
-                    height: "20vh",
+                    height: "100vh",
                     padding: "0 1rem",
                 }}
             >
@@ -113,7 +119,7 @@ export default function Login({ status, canResetPassword }) {
                         >
                             ログイン
                         </PrimaryButton>
-                        <CancelButton className="ml-4" disabled={processing}>
+                        <CancelButton className="ml-4">
                             <a href="/project">キャンセル</a>
                         </CancelButton>
                     </div>
