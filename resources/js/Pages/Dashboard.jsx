@@ -171,23 +171,6 @@ export default function dashboard({ auth, userDetails = {} }) {
                                     プロフィールを編集して、カードの表示内容を設定してください
                                 </p>
                             )}
-                            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                {/* QRコードエリア */}
-                                <div className="p-6 text-gray-900 flex flex-col items-center">
-                                    <QRCode value={userURL} size={128} />
-                                    {/* コピーボタン */}
-                                    <div className="mt-4 text-center">
-                                        <BlackButton
-                                            variant="contained"
-                                            onClick={() =>
-                                                copyToClipboard(userURL)
-                                            }
-                                        >
-                                            マイカードリンクをコピー
-                                        </BlackButton>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
