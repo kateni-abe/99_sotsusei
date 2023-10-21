@@ -66,9 +66,7 @@ Route::get('/mycard', function () {
 
 Route::get('/users', [UsersController::class, 'index']);
 
-// routes/web.php
-Route::get('/project/users', [SendcardController::class, 'show'])->name('sendcard.show');
-
+Route::get('/sendcard', [SendcardController::class, 'show'])->name('sendcard');
 
 
 
