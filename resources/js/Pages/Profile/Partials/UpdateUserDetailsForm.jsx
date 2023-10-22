@@ -16,6 +16,8 @@ export default function UpdateUserDetailsForm({ className = "" }) {
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             icon: userDetails.icon || "", // ユーザーのアイコンを設定します
+            mobile_number: userDetails.mobile_number || "", // ユーザーの生年月日を設定します
+            telephone_number: userDetails.telephone_number || "", // ユーザーの生年月日を設定します
             birthdate: userDetails.birthdate || "", // ユーザーの生年月日を設定します
             birthplace: userDetails.birthplace || "", // ユーザーの出身地を設定します
             company: userDetails.company || "", // ユーザーの会社名を設定します
@@ -31,6 +33,9 @@ export default function UpdateUserDetailsForm({ className = "" }) {
             line_id: userDetails.line_id || "", // ユーザーのLINE IDを設定します
             // 各公開/非公開フラグ
             icon_public: userDetails.icon_public || false,
+            mobile_number_public: userDetails.mobile_number_public || false,
+            telephone_number_public:
+                userDetails.telephone_number_public || false,
             birthdate_public: userDetails.birthdate_public || false,
             birthplace_public: userDetails.birthplace_public || false,
             company_public: userDetails.company_public || false,
@@ -76,27 +81,59 @@ export default function UpdateUserDetailsForm({ className = "" }) {
             <form onSubmit={updateUserDetails} className="mt-6 space-y-6">
                 {/* 各種情報入力フィールドを作成します */}
 
-                {/* ユーザーアイコン */}
-                {/* <div>
-                    <InputLabel htmlFor="icon" value="ユーザーアイコン" />
+                {/* 携帯番号 */}
+                <div>
+                    <InputLabel htmlFor="mobile_number" value="携帯番号" />
                     <TextInput
-                        id="icon"
-                        type="file"
+                        id="mobile_number"
+                        type="text"
                         className="mt-1 block w-full"
-                        onChange={(e) => setData("icon", e.target.files[0])}
-                        accept="image/*"
+                        value={data.mobile_number}
+                        onChange={(e) =>
+                            setData("mobile_number", e.target.value)
+                        }
                     />
                     <Toggle
-                        id="icon_public"
-                        checked={data.icon_public}
+                        id="mobile_number_public"
+                        checked={data.mobile_number_public}
                         onChange={(e) =>
-                            setData("icon_public", e.target.checked)
+                            setData("mobile_number_public", e.target.checked)
                         }
                         className="mt-1"
                         label="公開"
                     />
-                    <InputError message={errors.icon} className="mt-2" />
-                </div> */}
+                    <InputError
+                        message={errors.mobile_number}
+                        className="mt-2"
+                    />
+                </div>
+
+                {/* 電話番号 */}
+                <div>
+                    <InputLabel htmlFor="telephone_number" value="電話番号" />
+                    <TextInput
+                        id="telephone_number"
+                        type="text"
+                        className="mt-1 block w-full"
+                        value={data.telephone_number}
+                        onChange={(e) =>
+                            setData("telephone_number", e.target.value)
+                        }
+                    />
+                    <Toggle
+                        id="telephone_number_public"
+                        checked={data.telephone_number_public}
+                        onChange={(e) =>
+                            setData("telephone_number_public", e.target.checked)
+                        }
+                        className="mt-1"
+                        label="公開"
+                    />
+                    <InputError
+                        message={errors.telephone_number}
+                        className="mt-2"
+                    />
+                </div>
 
                 {/* 生年月日 */}
                 <div>

@@ -1,16 +1,10 @@
-// ファイル: resources/js/Pages/Dashboard.jsx
-
-// AuthenticatedLayoutコンポーネントをインポート
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-// Inertia.jsのHeadコンポーネントをインポート
 import { Head } from "@inertiajs/react";
-// qrcode.react モジュールをインポート
+import { useState } from "react";
 import QRCode from "qrcode.react";
-
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
-//mui ボタンの設定
 const BlackButton = styled(Button)({
     boxShadow: "none",
     textTransform: "none",
@@ -45,24 +39,79 @@ const BlackButton = styled(Button)({
     },
 });
 
-// Dashboardコンポーネントを定義。authオブジェクトとuserDetailsオブジェクトをプロップとして受け取りますよ。
-export default function dashboard({ auth, userDetails = {} }) {
-    // console.log(userDetails);
-
+export default function sendcard({ auth, userDetails = {} }) {
     const publicDetailsKeys = Object.keys(userDetails).filter(
         (key) => key.endsWith("_public") && userDetails[key]
     );
 
+    const [showQR, setShowQR] = useState(false); // QRコードの表示を制御するための状態変数
+
+    const handleButtonClick = () => {
+        setShowQR(true);
+    };
+
     const hasPublicDetails = publicDetailsKeys.length > 0;
 
-    //QRコードのURL
-    const userURL = `${window.location.origin}/project/user/${auth.user.unique_token}`;
+    // VCFコンテンツの生成
+    let vcfContent = "BEGIN:VCARD\nVERSION:3.0\n";
+    if (userDetails.email_public && userDetails.email) {
+        vcfContent += `EMAIL:${userDetails.email}\n`;
+    }
+    if (userDetails.mobile_number_public && userDetails.mobile_number) {
+        vcfContent += `TEL;TYPE=CELL:${userDetails.mobile_number}\n`;
+    }
+    if (userDetails.telephone_number_public && userDetails.telephone_number) {
+        vcfContent += `TEL;TYPE=HOME:${userDetails.telephone_number}\n`;
+    }
+    if (userDetails.birthdate_public && userDetails.birthdate) {
+        vcfContent += `BDAY:${userDetails.birthdate}\n`;
+    }
+    if (userDetails.birthplace_public && userDetails.birthplace) {
+        vcfContent += `ADR;TYPE=HOME:;;${userDetails.birthplace}\n`;
+    }
+    if (userDetails.company_public && userDetails.company) {
+        vcfContent += `ORG:${userDetails.company}\n`;
+    }
+    if (userDetails.position_public && userDetails.position) {
+        vcfContent += `TITLE:${userDetails.position}\n`;
+    }
+    // 注: VCFには業種のフィールドが存在しないため、カスタムフィールドとしてX-INDUSTRYを使用
+    if (userDetails.industry_public && userDetails.industry) {
+        vcfContent += `X-INDUSTRY:${userDetails.industry}\n`;
+    }
+    if (userDetails.hobby_public && userDetails.hobby) {
+        vcfContent += `NOTE:趣味:${userDetails.hobby}\n`;
+    }
+    if (userDetails.strengths_public && userDetails.strengths) {
+        vcfContent += `NOTE:得意なこと:${userDetails.strengths}\n`;
+    }
+    if (userDetails.weaknesses_public && userDetails.weaknesses) {
+        vcfContent += `NOTE:苦手なこと:${userDetails.weaknesses}\n`;
+    }
+    if (userDetails.phone_number_public && userDetails.phone_number) {
+        vcfContent += `TEL:${userDetails.phone_number}\n`;
+    }
+    // 注: SNSのアカウントはカスタムフィールドとして追加
+    if (userDetails.facebook_account_public && userDetails.facebook_account) {
+        vcfContent += `X-FACEBOOK:${userDetails.facebook_account}\n`;
+    }
+    if (userDetails.instagram_account_public && userDetails.instagram_account) {
+        vcfContent += `X-INSTAGRAM:${userDetails.instagram_account}\n`;
+    }
+    if (userDetails.x_account_public && userDetails.x_account) {
+        vcfContent += `X-ACCOUNT:${userDetails.x_account}\n`;
+    }
+    if (userDetails.line_id_public && userDetails.line_id) {
+        vcfContent += `X-LINE-ID:${userDetails.line_id}\n`;
+    }
 
-    const copyToClipboard = (url) => {
+    vcfContent += "END:VCARD\n";
+
+    const copyToClipboard = (text) => {
         navigator.clipboard
-            .writeText(url)
+            .writeText(text)
             .then(() => {
-                alert("マイカードリンクがクリップボードにコピーされました!");
+                alert("VCF内容がクリップボードにコピーされました!");
             })
             .catch((err) => {
                 console.error("Failed to copy text: ", err);
@@ -71,8 +120,44 @@ export default function dashboard({ auth, userDetails = {} }) {
     };
 
     return (
-        // AuthenticatedLayoutコンポーネントを使用して、
-        // auth.userオブジェクトとヘッダー要素を渡します。
+        // <AuthenticatedLayout
+        //     user={auth.user}
+        //     header={
+        //         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        //             マイカード
+        //         </h2>
+        //     }
+        // >
+        //     <Head title="マイカード" />
+
+        //     <div className="py-12">
+        //         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        //             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        //                 <div className="p-6 text-gray-900">
+        //                     <h2>{auth.user.name}</h2>
+        //                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        //                         <div className="p-6 text-gray-900 flex flex-col items-center">
+        //                             <QRCode
+        //                                 value={encodeURI(vcfContent)}
+        //                                 size={128}
+        //                             />
+        //                             <div className="mt-4 text-center">
+        //                                 <BlackButton
+        //                                     variant="contained"
+        //                                     onClick={() =>
+        //                                         copyToClipboard(vcfContent)
+        //                                     }
+        //                                 >
+        //                                     VCFをコピー
+        //                                 </BlackButton>
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </AuthenticatedLayout>
         <AuthenticatedLayout
             user={auth.user}
             header={
@@ -81,32 +166,41 @@ export default function dashboard({ auth, userDetails = {} }) {
                 </h2>
             }
         >
-            {/* Headコンポーネントを使用してページタイトルを設定します。 */}
             <Head title="マイカード" />
 
-            {/* 主要コンテンツエリア */}
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        {/* ユーザーがログインしていることを通知するメッセージ */}
                         <div className="p-6 text-gray-900">
-                            <h2>{auth.user.name}</h2>{" "}
+                            <h2>{auth.user.name}</h2>
                             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                {/* QRコードエリア */}
-                                <div className="p-6 text-gray-900 flex flex-col items-center">
-                                    <QRCode value={userURL} size={128} />
-                                    {/* コピーボタン */}
-                                    <div className="mt-4 text-center">
+                                {!showQR ? (
+                                    <div className="p-6 text-gray-900 flex flex-col items-center">
                                         <BlackButton
                                             variant="contained"
-                                            onClick={() =>
-                                                copyToClipboard(userURL)
-                                            }
+                                            onClick={handleButtonClick}
                                         >
-                                            マイカードリンクをコピー
+                                            プロフィールを渡す
                                         </BlackButton>
                                     </div>
-                                </div>
+                                ) : (
+                                    <div className="p-6 text-gray-900 flex flex-col items-center">
+                                        <QRCode
+                                            value={`${window.location.origin}/api/vcf/${auth.user.unique_token}`} // このAPIエンドポイントは次に定義します
+                                            size={128}
+                                        />
+                                        <div className="mt-4 text-center">
+                                            <BlackButton
+                                                variant="contained"
+                                                onClick={() =>
+                                                    copyToClipboard(vcfContent)
+                                                }
+                                            >
+                                                VCFをコピー
+                                            </BlackButton>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

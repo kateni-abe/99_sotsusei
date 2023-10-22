@@ -15,6 +15,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
+
 /*
 全体構成解説:
 - ルートファサードとRequestクラスをインポート:

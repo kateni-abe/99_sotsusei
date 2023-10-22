@@ -65,11 +65,15 @@ Route::get('/mycard', function () {
 // ルート名指定
 ->name('mycard');
 
-Route::get('/users', [UsersController::class, 'index']);
+Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+
 
 Route::get('/send-card', [SendCardController::class, 'index'])->name('send-card');
 
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index')->middleware('auth');
+
+Route::get('/project/user/{unique_token}.vcf', 'VcfController@generateVcf');
+
 
 
 

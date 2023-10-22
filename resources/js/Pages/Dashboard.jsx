@@ -77,15 +77,21 @@ export default function dashboard({ auth, userDetails = {} }) {
                             {/* ユーザーの氏名を表示 */}
                             {hasPublicDetails ? (
                                 <>
-                                    {userDetails.icon_public === true && (
+                                    {userDetails.mobile_number_public ==
+                                        true && (
                                         <div>
-                                            アイコン:{" "}
-                                            <img
-                                                src={userDetails.icon}
-                                                alt="User Icon"
-                                            />
+                                            携帯番号:
+                                            {userDetails.mobile_number}
                                         </div>
                                     )}
+                                    {userDetails.telephone_number_public ==
+                                        true && (
+                                        <div>
+                                            電話番号:
+                                            {userDetails.telephone_number}
+                                        </div>
+                                    )}
+
                                     {userDetails.birthdate_public == true && (
                                         <div>
                                             生年月日: {userDetails.birthdate}
