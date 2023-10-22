@@ -45,7 +45,9 @@ export default function sendcard({ auth, userDetails = {} }) {
     );
 
     const [showQR, setShowQR] = useState(false); // QRコードの表示を制御するための状態変数
+    const [vcfUrl, setVcfUrl] = useState(""); // QRコードのURLを格納するための状態変数
 
+    // 以下のコードは変更されていません
     const hasPublicDetails = publicDetailsKeys.length > 0;
 
     // VCFコンテンツの生成
