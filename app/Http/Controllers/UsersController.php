@@ -12,7 +12,13 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('name', 'asc')->get();
+        $currentUser = auth()->user();
+        $users = User::orderBy('name', 'asc')->get()->map(function ($user) use ($currentUser) {
+            $user->isFollowing = $currentUser->isFollowing($user);
+            return $user;
+        });
         return Inertia::render('Users/Index', ['users' => $users]);
     }
+
+    
 }
