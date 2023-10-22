@@ -105,9 +105,26 @@ export default function sendcard({ auth, userDetails = {} }) {
 
     vcfContent += "END:VCARD\n";
 
+    // const handleButtonClick = () => {
+    //     // APIエンドポイントを呼び出し、.vcfファイルをデータベースに保存
+    //     fetch(`/api/vcf/store/${auth.user.unique_token}`)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setShowQR(true);
+    //             setVcfUrl(data.vcf_url);
+    //         });
+    // };
+
     const handleButtonClick = () => {
         // APIエンドポイントを呼び出し、.vcfファイルをデータベースに保存
-        fetch(`/api/vcf/store/${auth.user.unique_token}`)
+        fetch(`/project/api/vcf/store`, {
+            method: "POST", // メソッドをPOSTに変更
+            headers: {
+                "Content-Type": "application/json",
+                // 他の必要なヘッダー
+            },
+            body: JSON.stringify({ unique_token: auth.user.unique_token }), // トークンをリクエストボディに含める
+        })
             .then((response) => response.json())
             .then((data) => {
                 setShowQR(true);
