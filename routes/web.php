@@ -70,7 +70,12 @@ Route::get('/users', [UsersController::class, 'index']);
 
 Route::get('/send-card', [SendCardController::class, 'index'])->name('send-card');
 
+Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index')->middleware('auth');
 
+Route::middleware(['auth'])->group(function () {
+    Route::post('/project/follow/{user}', [FollowController::class, 'follow'])->name('follow');
+    Route::delete('/project/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');
+});
 
 
 /*
