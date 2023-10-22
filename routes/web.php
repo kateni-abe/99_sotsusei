@@ -76,8 +76,8 @@ Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index
 Route::get('/project/user/{unique_token}.vcf', 'VcfController@generateVcf');
 
 
-Route::get('/api/vcf/store/{unique_token}', [VcfController::class, 'storeVcfToDatabase']);
-
+// Route::get('/api/vcf/store/{unique_token}', [VcfController::class, 'storeVcfToDatabase']);
+Route::post('project/api/vcf/store', [VcfController::class, 'store'])->name('vcf.store');
 
 
 
