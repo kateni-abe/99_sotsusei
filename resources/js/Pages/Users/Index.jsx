@@ -62,7 +62,7 @@ function Index({ users }) {
                 }}
                 component="div"
             >
-                ユーザー一覧
+                ユーザー一覧だよ
             </Typography>
             <ul>
                 {users.map((user) => (
