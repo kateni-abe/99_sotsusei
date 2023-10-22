@@ -2,7 +2,6 @@
 
 // コントローラーインポート
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FollowController;
 use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SendcardController;
