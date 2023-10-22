@@ -32,21 +32,4 @@ class User extends Authenticatable
         return $this->hasOne(UserDetails::class);
     }
 
-    public function isFollowing(User $user)
-{
-    return $this->following()->where('followee_id', $user->id)->exists();
-}
-
-    public function following()
-    {
-        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id');
-    }
-
-    public function followers()
-    {
-        return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id');
-    }
-
-
-
     }
