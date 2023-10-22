@@ -155,7 +155,7 @@ export default function sendcard({ auth, userDetails = {} }) {
                                             variant="contained"
                                             onClick={handleButtonClick}
                                         >
-                                            プロフィールを渡す
+                                            プロフィールを渡すぜ
                                         </BlackButton>
                                     </div>
                                 ) : (
