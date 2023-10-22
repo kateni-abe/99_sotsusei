@@ -117,7 +117,7 @@ export default function sendcard({ auth, userDetails = {} }) {
 
     const handleButtonClick = () => {
         // APIエンドポイントを呼び出し、.vcfファイルをデータベースに保存
-        fetch(`/project/api/vcf/store`, {
+        fetch(`/project/project/api/vcf/store`, {
             method: "POST", // メソッドをPOSTに変更
             headers: {
                 "Content-Type": "application/json",
