@@ -115,12 +115,17 @@ export default function sendcard({ auth, userDetails = {} }) {
     //         });
     // };
 
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+
     const handleButtonClick = () => {
         // APIエンドポイントを呼び出し、.vcfファイルをデータベースに保存
         fetch(`/api/vcf/store`, {
             method: "POST", // メソッドをPOSTに変更
             headers: {
                 "Content-Type": "application/json",
+                "X-CSRF-TOKEN": csrfToken,
                 // 他の必要なヘッダー
             },
             body: JSON.stringify({ unique_token: auth.user.unique_token }), // トークンをリクエストボディに含める
