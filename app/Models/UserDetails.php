@@ -14,10 +14,7 @@ class UserDetails extends Model
      *
      * @var string
      */
-    protected $table = [
-        'user_details',
-        'vcf_url',
-    ];
+    protected $table = 'user_details'; 
 
     /**
      * The attributes that are mass assignable.
