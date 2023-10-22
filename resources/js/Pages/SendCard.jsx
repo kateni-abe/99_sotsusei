@@ -6,7 +6,7 @@ function Sendcard() {
 
     const handleButtonClick = async () => {
         try {
-            const response = await fetch("/api/vcf/generate", {
+            const response = await fetch("/project/api/vcf/generate", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",

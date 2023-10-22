@@ -81,7 +81,7 @@ Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index
 // Route::post('/api/vcf/store/{unique_token}', [VcfController::class, 'store'])->name('vcf.store');
 
 // routes/web.php
-Route::post('/api/vcf/generate', [VcfController::class, 'generateVcf'])->middleware('auth');
+Route::post('/project/api/vcf/generate', [VcfController::class, 'generateVcf'])->middleware('auth');
 
 
 
