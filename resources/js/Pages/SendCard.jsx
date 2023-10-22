@@ -120,15 +120,13 @@ export default function sendcard({ auth, userDetails = {} }) {
         .getAttribute("content");
 
     const handleButtonClick = () => {
-        // APIエンドポイントを呼び出し、.vcfファイルをデータベースに保存
-        fetch(`/api/vcf/store`, {
-            method: "POST", // メソッドをPOSTに変更
+        fetch("/api/vcf/store", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken,
-                // 他の必要なヘッダー
+                "X-CSRF-TOKEN": csrfToken, // CSRFトークンを追加
             },
-            body: JSON.stringify({ unique_token: auth.user.unique_token }), // トークンをリクエストボディに含める
+            body: JSON.stringify({ unique_token: auth.user.unique_token }),
         })
             .then((response) => response.json())
             .then((data) => {
