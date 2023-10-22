@@ -43,7 +43,7 @@ const BlackButton = styled(Button)({
 
 function Index({ users }) {
     const handleFollow = (userId) => {
-        Inertia.post(`/follow/${userId}`);
+        Inertia.post(`/project/follow/${userId}`);
     };
 
     const handleUnfollow = (userId) => {
