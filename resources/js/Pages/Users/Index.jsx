@@ -1,5 +1,5 @@
-// resources/js/Pages/Users/Index.jsx
 import { Link, Head } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia"; // この行を追加
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
@@ -42,8 +42,15 @@ const BlackButton = styled(Button)({
 });
 
 function Index({ users }) {
+    const handleFollow = (userId) => {
+        Inertia.post(`/follow/${userId}`);
+    };
+
+    const handleUnfollow = (userId) => {
+        Inertia.delete(`/unfollow/${userId}`);
+    };
+
     return (
-        // 追加: flex container を設定
         <div
             style={{
                 display: "flex",
@@ -66,11 +73,6 @@ function Index({ users }) {
             >
                 ユーザー一覧
             </Typography>
-            {/* <ul>
-                {users.map((user) => (
-                    <li key={user.id}>{user.name}</li>
-                ))}
-            </ul> */}
             <ul>
                 {users.map((user) => (
                     <li key={user.id}>
