@@ -132,7 +132,8 @@ export default function sendcard({ auth, userDetails = {} }) {
             .then((data) => {
                 setShowQR(true);
                 setVcfUrl(data.vcf_url);
-            });
+            })
+            .catch((error) => console.error("Error:", error));
     };
 
     return (
@@ -158,7 +159,7 @@ export default function sendcard({ auth, userDetails = {} }) {
                                             variant="contained"
                                             onClick={handleButtonClick}
                                         >
-                                            プロフィールを渡すぜ
+                                            プロフィールを渡す
                                         </BlackButton>
                                     </div>
                                 ) : (

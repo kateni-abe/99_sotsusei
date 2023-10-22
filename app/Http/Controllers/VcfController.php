@@ -23,7 +23,7 @@ class VcfController extends Controller
             ->header('Content-Disposition', 'attachment; filename="' . $user->name . '.vcf"');
     }
 
-    public function storeVcfToDatabase($unique_token)
+    public function store($unique_token)
     {
         $user = User::where('unique_token', $unique_token)->firstOrFail();
         $userDetails = $user->userDetails;

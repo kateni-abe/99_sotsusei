@@ -4,7 +4,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SendcardController;
+use App\Http\Controllers\SendCardController;
 use App\Http\Controllers\UserDetailsController;
 
 
@@ -73,11 +73,15 @@ Route::get('/send-card', [SendCardController::class, 'index'])->name('send-card'
 
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index')->middleware('auth');
 
-Route::get('/project/user/{unique_token}.vcf', 'VcfController@generateVcf');
+Route::get('/user/{unique_token}.vcf', [VcfController::class, 'generateVcf']);
+
 
 //vcfファイルの作成
 // Route::get('/api/vcf/store/{unique_token}', [VcfController::class, 'storeVcfToDatabase']);
-Route::post('/api/vcf/store', [VcfController::class, 'store'])->name('vcf.store');
+Route::post('/api/vcf/store/{unique_token}', [VcfController::class, 'store'])->name('vcf.store');
+
+
+
 
 
 
