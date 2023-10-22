@@ -1,4 +1,4 @@
-import{j as e,q as d,W as _}from"./app-e323cbec.js";import{T as n,I as i}from"./TextInput-49f13225.js";import{I as r}from"./InputLabel-ec63780e.js";import{P as g}from"./PrimaryButton-31d4c1c7.js";import{e as x}from"./transition-3f6784d2.js";function o({checked:u,onChange:s,label:l}){return e.jsxs("label",{className:"relative inline-flex items-center cursor-pointer",children:[e.jsx("input",{type:"checkbox",className:"sr-only peer",checked:u,onChange:s}),e.jsx("div",{className:`
+import{j as e,q as d,W as _}from"./app-02093d40.js";import{T as n,I as i}from"./TextInput-e144a519.js";import{I as r}from"./InputLabel-d13fdb62.js";import{P as g}from"./PrimaryButton-1a5c9cbe.js";import{e as x}from"./transition-bed3f7bf.js";function o({checked:u,onChange:s,label:l}){return e.jsxs("label",{className:"relative inline-flex items-center cursor-pointer",children:[e.jsx("input",{type:"checkbox",className:"sr-only peer",checked:u,onChange:s}),e.jsx("div",{className:`
                 w-11 h-6 
                 bg-gray-200 
                 rounded-full 
