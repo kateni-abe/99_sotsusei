@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class SendcardController extends Controller
+class SendCardController extends Controller
 {
-    public function show(Request $request)
+    public function index(Request $request)
     {
-        $userURL = $request->user()->getQrCodeUrl();  // このメソッドは実装する必要があります
-        return Inertia::render('Sendcard', [
-            'userURL' => $userURL,
+        $user = $request->user();
+        $vcfUrl = $user->userDetails->vcf_url;
+
+        return Inertia::render('SendCard', [
+            'vcfUrl' => $vcfUrl,
         ]);
-    }
-    public function index()
-    {
-        return Inertia::render('SendCard');
     }
 }

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VcfController extends Controller
 {
@@ -14,6 +15,36 @@ class VcfController extends Controller
         $user = User::where('unique_token', $unique_token)->firstOrFail();
         $userDetails = $user->userDetails;
 
+        // VCFファイル内容の構築
+        $vcfContent = $this->buildVcfContent($user, $userDetails);
+
+        return response($vcfContent)
+            ->header('Content-Type', 'text/vcard')
+            ->header('Content-Disposition', 'attachment; filename="' . $user->name . '.vcf"');
+    }
+
+    public function storeVcfToDatabase($unique_token)
+    {
+        $user = User::where('unique_token', $unique_token)->firstOrFail();
+        $userDetails = $user->userDetails;
+
+        // VCFファイル内容の構築
+        $vcfContent = $this->buildVcfContent($user, $userDetails);
+
+        // .vcfファイルをデータベースに保存
+        $vcfFilePath = 'vcf/' . $unique_token . '.vcf';
+        Storage::disk('public')->put($vcfFilePath, $vcfContent);
+
+        // .vcfファイルのURLを更新
+        $vcfUrl = Storage::url($vcfFilePath);
+        $userDetails->vcf_url = $vcfUrl;
+        $userDetails->save();
+
+        return response()->json(['vcf_url' => $vcfUrl]);
+    }
+
+    private function buildVcfContent($user, $userDetails)
+    {
         // VCFファイル内容の構築
         $vcfContent = "BEGIN:VCARD\n";
         $vcfContent .= "VERSION:3.0\n";
@@ -68,6 +99,8 @@ class VcfController extends Controller
             if ($userDetails->line_id_public && $userDetails->line_id) {
                 $vcfContent .= "NOTE:LINE ID: {$userDetails->line_id}\n";
             }
+
+            
         }
         
         $vcfContent .= "END:VCARD\n";

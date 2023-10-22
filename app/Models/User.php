@@ -16,7 +16,10 @@ class User extends Authenticatable
         'email',
         'password',
         'unique_token',
+        'vcf_url',
     ];
+
+    
 
     protected $hidden = [
         'password',
@@ -47,6 +50,7 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id');
     }
 
+    
 
 
     }

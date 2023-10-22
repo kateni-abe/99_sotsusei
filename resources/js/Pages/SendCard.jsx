@@ -46,10 +46,6 @@ export default function sendcard({ auth, userDetails = {} }) {
 
     const [showQR, setShowQR] = useState(false); // QRコードの表示を制御するための状態変数
 
-    const handleButtonClick = () => {
-        setShowQR(true);
-    };
-
     const hasPublicDetails = publicDetailsKeys.length > 0;
 
     // VCFコンテンツの生成
@@ -107,57 +103,17 @@ export default function sendcard({ auth, userDetails = {} }) {
 
     vcfContent += "END:VCARD\n";
 
-    const copyToClipboard = (text) => {
-        navigator.clipboard
-            .writeText(text)
-            .then(() => {
-                alert("VCF内容がクリップボードにコピーされました!");
-            })
-            .catch((err) => {
-                console.error("Failed to copy text: ", err);
-                alert("エラーが発生しました。もう一度お試しください。");
+    const handleButtonClick = () => {
+        // APIエンドポイントを呼び出し、.vcfファイルをデータベースに保存
+        fetch(`/api/vcf/store/${auth.user.unique_token}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setShowQR(true);
+                setVcfUrl(data.vcf_url);
             });
     };
 
     return (
-        // <AuthenticatedLayout
-        //     user={auth.user}
-        //     header={
-        //         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-        //             マイカード
-        //         </h2>
-        //     }
-        // >
-        //     <Head title="マイカード" />
-
-        //     <div className="py-12">
-        //         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        //             <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        //                 <div className="p-6 text-gray-900">
-        //                     <h2>{auth.user.name}</h2>
-        //                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        //                         <div className="p-6 text-gray-900 flex flex-col items-center">
-        //                             <QRCode
-        //                                 value={encodeURI(vcfContent)}
-        //                                 size={128}
-        //                             />
-        //                             <div className="mt-4 text-center">
-        //                                 <BlackButton
-        //                                     variant="contained"
-        //                                     onClick={() =>
-        //                                         copyToClipboard(vcfContent)
-        //                                     }
-        //                                 >
-        //                                     VCFをコピー
-        //                                 </BlackButton>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </AuthenticatedLayout>
         <AuthenticatedLayout
             user={auth.user}
             header={
@@ -186,19 +142,9 @@ export default function sendcard({ auth, userDetails = {} }) {
                                 ) : (
                                     <div className="p-6 text-gray-900 flex flex-col items-center">
                                         <QRCode
-                                            value={`${window.location.origin}/api/vcf/${auth.user.unique_token}`} // このAPIエンドポイントは次に定義します
+                                            value={vcfUrl} // 修正
                                             size={128}
                                         />
-                                        <div className="mt-4 text-center">
-                                            <BlackButton
-                                                variant="contained"
-                                                onClick={() =>
-                                                    copyToClipboard(vcfContent)
-                                                }
-                                            >
-                                                VCFをコピー
-                                            </BlackButton>
-                                        </div>
                                     </div>
                                 )}
                             </div>

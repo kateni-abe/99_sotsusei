@@ -10,6 +10,7 @@ use App\Http\Controllers\UserDetailsController;
 
 // アプリケーション基本クラス
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VcfController;
 use Illuminate\Foundation\Application;
 use App\Models\User;
 
@@ -74,6 +75,8 @@ Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index
 
 Route::get('/project/user/{unique_token}.vcf', 'VcfController@generateVcf');
 
+
+Route::get('/api/vcf/store/{unique_token}', [VcfController::class, 'storeVcfToDatabase']);
 
 
 
