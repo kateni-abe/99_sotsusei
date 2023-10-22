@@ -1,9 +1,8 @@
 import { Link, Head } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia"; // この行を追加
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 
 //mui ボタンの設定
 const BlackButton = styled(Button)({
@@ -42,14 +41,6 @@ const BlackButton = styled(Button)({
 });
 
 function Index({ users }) {
-    const handleFollow = (userId) => {
-        Inertia.post(`/follow/${userId}`);
-    };
-
-    const handleUnfollow = (userId) => {
-        Inertia.delete(`/unfollow/${userId}`);
-    };
-
     return (
         <div
             style={{
@@ -57,7 +48,7 @@ function Index({ users }) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                minHeight: "100vh", // 画面全体を占めるようにする
+                minHeight: "100vh",
             }}
         >
             <Typography
@@ -75,24 +66,7 @@ function Index({ users }) {
             </Typography>
             <ul>
                 {users.map((user) => (
-                    <li key={user.id}>
-                        {user.name}
-                        {user.isFollowing ? (
-                            <Button
-                                color="default"
-                                onClick={() => handleUnfollow(user.id)}
-                            >
-                                友達をやめる
-                            </Button>
-                        ) : (
-                            <Button
-                                color="primary"
-                                onClick={() => handleFollow(user.id)}
-                            >
-                                友達になる
-                            </Button>
-                        )}
-                    </li>
+                    <li key={user.id}>{user.name}</li>
                 ))}
             </ul>
             {/* ボタンエリア */}
