@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 // 必要なクラスとインターフェースのインポート
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -79,6 +80,18 @@ class ProfileController extends Controller
 
         // ルートページへのリダイレクト
         return Redirect::to('/');
+    }
+
+    public function show($unique_token)
+    {
+        $user = User::where('unique_token', $unique_token)->firstOrFail();
+        $userDetails = $user->userDetails;
+        
+        // Inertia.jsを使用して、publicプロフィールページをレンダリング
+        return Inertia::render('Profile/Public', [
+            'user' => $user,
+            'userDetails' => $userDetails,
+        ]);
     }
 }
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\UserDetailsController;
 
 // アプリケーション基本クラス
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VCardController;
 use App\Http\Controllers\VcfController;
 use Illuminate\Foundation\Application;
 use App\Models\User;
@@ -18,6 +19,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 // Inertiaライブラリ
 use Inertia\Inertia;
+
+
 
 
 
@@ -81,9 +84,13 @@ Route::get('/friends', [FriendsController::class, 'index'])->name('friends.index
 // Route::post('/api/vcf/store/{unique_token}', [VcfController::class, 'store'])->name('vcf.store');
 
 // routes/web.php
-Route::post('/project/api/vcf/generate', [VcfController::class, 'generateVcf'])->middleware('auth');
+// Route::post('/project/api/vcf/generate', [VcfController::class, 'generateVcf'])->middleware('auth');
 
 
+Route::post('/project/api/vcf/generate', [VCardController::class, 'generate']);
+
+
+Route::get('/profile/{unique_token}', [ProfileController::class, 'show'])->name('public.profile');
 
 
 

@@ -87,6 +87,15 @@ export default function Authenticated({ user, header, children }) {
                                         >
                                             プロフィールを編集
                                         </Dropdown.Link>
+
+                                        <Dropdown.Link
+                                            href={route("public.profile", {
+                                                unique_token: user.unique_token,
+                                            })}
+                                        >
+                                            Public
+                                        </Dropdown.Link>
+
                                         <Dropdown.Link
                                             href={route("users.index")}
                                         >

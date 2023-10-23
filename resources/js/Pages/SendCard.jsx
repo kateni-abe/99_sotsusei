@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import QRCode from "qrcode.react";
 
-function Sendcard() {
+function SendCard() {
     const [vcfUrl, setVcfUrl] = useState("");
 
     const handleButtonClick = async () => {
@@ -32,4 +32,4 @@ function Sendcard() {
     );
 }
 
-export default Sendcard;
+export default SendCard;

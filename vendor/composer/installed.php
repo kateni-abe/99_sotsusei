@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '990e2cd4f36335feaa07aaa4fb837d3629900479',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -364,6 +364,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'jeroendesloovere/vcard' => array(
+            'pretty_version' => 'dev-2.0.0-dev',
+            'version' => 'dev-2.0.0-dev',
+            'reference' => '13f4c3957295af91c6740800daadb723f54e1a08',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jeroendesloovere/vcard',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -389,9 +398,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '990e2cd4f36335feaa07aaa4fb837d3629900479',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
