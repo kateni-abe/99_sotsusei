@@ -96,11 +96,11 @@ export default function Authenticated({ user, header, children }) {
                                             Public
                                         </Dropdown.Link>
 
-                                        <Dropdown.Link
+                                        {/* <Dropdown.Link
                                             href={route("users.index")}
                                         >
                                             ユーザー一覧
-                                        </Dropdown.Link>
+                                        </Dropdown.Link> */}
                                         {/* <Dropdown.Link
                                             href={route("friends.index")}
                                         >
@@ -177,36 +177,33 @@ export default function Authenticated({ user, header, children }) {
                         >
                             マイカード
                         </ResponsiveNavLink>
-                    </div>
-
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            {/** プロフィールとログアウトリンク */}
-                            <ResponsiveNavLink href={route("profile.edit")}>
-                                プロフィールを編集
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                method="post"
-                                href={route("logout")}
-                                as="button"
-                            >
-                                ログアウト
-                            </ResponsiveNavLink>
-                        </div>
+                        <ResponsiveNavLink href={route("send-card")}>
+                            マイカードを渡す
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route("profile.edit")}>
+                            プロフィールを編集
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("public.profile", {
+                                unique_token: user.unique_token,
+                            })}
+                        >
+                            Public
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route("users.index")}>
+                            ユーザー一覧
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            method="post"
+                            href={route("logout")}
+                            as="button"
+                        >
+                            ログアウト
+                        </ResponsiveNavLink>
                     </div>
                 </div>
             </nav>
 
-            {/** ヘッダーエリア */}
             {header && (
                 <header className="bg-white shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -215,7 +212,6 @@ export default function Authenticated({ user, header, children }) {
                 </header>
             )}
 
-            {/** メインコンテンツエリア */}
             <main>{children}</main>
         </div>
     );

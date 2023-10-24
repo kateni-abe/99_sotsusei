@@ -304,7 +304,7 @@ export default function UpdateUserDetailsForm({ className = "" }) {
                     <InputError message={errors.weaknesses} className="mt-2" />
                 </div>
 
-                {/* 電話番号 */}
+                {/* 電話番号
                 <div>
                     <InputLabel htmlFor="phone_number" value="電話番号" />
                     <TextInput
@@ -328,7 +328,7 @@ export default function UpdateUserDetailsForm({ className = "" }) {
                         message={errors.phone_number}
                         className="mt-2"
                     />
-                </div>
+                </div> */}
 
                 {/* facebook */}
                 <div>
