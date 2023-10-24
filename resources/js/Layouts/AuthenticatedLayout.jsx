@@ -5,43 +5,24 @@ import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 
-/**
- * `Authenticated`コンポーネントは、認証されたユーザー向けのレイアウトを提供します。
- */
 export default function Authenticated({ user, header, children }) {
-    // ナビゲーションドロップダウンの表示状態を管理するstateです
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+    const publicProfileLink = route("public.profile", {
+        unique_token: user.unique_token,
+    });
+    const qrCodeLink = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${publicProfileLink}`;
 
     return (
         <div className="min-h-screen bg-gray-100">
-            {/** ナビゲーションバー */}
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
-                        {/** ロゴとダッシュボードリンク */}
                         <div className="flex">
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                {/** ダッシュボードへのリンク */}
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
-                                >
-                                    マイカード
-                                </NavLink>
-                                {/* <NavLink
-                                    href={route("mycard")}
-                                    active={route().current("mycard")}
-                                >
-                                    マイカード
-                                </NavLink> */}
-                            </div>
+                            {/* Left Navigation Elements */}
                         </div>
-
-                        {/** ユーザーメニュー */}
-                        <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        <div className="flex items-center">
                             <div className="ml-3 relative">
-                                {/** ドロップダウンメニュー */}
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
@@ -49,10 +30,7 @@ export default function Authenticated({ user, header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {/** ユーザー名 */}
                                                 {user.name}
-
-                                                {/** ドロップダウンアイコン */}
                                                 <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -68,44 +46,12 @@ export default function Authenticated({ user, header, children }) {
                                             </button>
                                         </span>
                                     </Dropdown.Trigger>
-
                                     <Dropdown.Content>
-                                        {/** プロフィールとログアウトリンク */}
-                                        <Dropdown.Link
-                                            href={route("dashboard")}
-                                        >
-                                            マイカード
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route("send-card")}
-                                        >
-                                            マイカードを渡す
-                                        </Dropdown.Link>
-
                                         <Dropdown.Link
                                             href={route("profile.edit")}
                                         >
-                                            プロフィールを編集
+                                            マイカードを編集
                                         </Dropdown.Link>
-
-                                        <Dropdown.Link
-                                            href={route("public.profile", {
-                                                unique_token: user.unique_token,
-                                            })}
-                                        >
-                                            Public
-                                        </Dropdown.Link>
-
-                                        {/* <Dropdown.Link
-                                            href={route("users.index")}
-                                        >
-                                            ユーザー一覧
-                                        </Dropdown.Link> */}
-                                        {/* <Dropdown.Link
-                                            href={route("friends.index")}
-                                        >
-                                            友達一覧
-                                        </Dropdown.Link> */}
                                         <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
@@ -117,9 +63,7 @@ export default function Authenticated({ user, header, children }) {
                                 </Dropdown>
                             </div>
                         </div>
-
-                        {/** モバイル用ナビゲーションボタン */}
-                        <div className="-mr-2 flex items-center sm:hidden">
+                        <div className="-mr-2 flex items-center sm:hidden ">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
@@ -128,74 +72,43 @@ export default function Authenticated({ user, header, children }) {
                                 }
                                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                             >
-                                <svg
-                                    className="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    {/** ハンバーガーアイコンとクローズアイコン */}
-                                    <path
-                                        className={
-                                            !showingNavigationDropdown
-                                                ? "inline-flex"
-                                                : "hidden"
-                                        }
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        className={
-                                            showingNavigationDropdown
-                                                ? "inline-flex"
-                                                : "hidden"
-                                        }
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
+                                {/* Mobile Menu Icon */}
                             </button>
                         </div>
                     </div>
+                    <div className="flex justify-center h-100">
+                        {" "}
+                        {/* Adjusted the height here */}
+                        <a
+                            href={publicProfileLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img
+                                src={qrCodeLink}
+                                alt="QR Code for Public Profile"
+                                style={{
+                                    width: "100px",
+                                    height: "100px",
+                                    margin: "20px",
+                                }}
+                            />
+                        </a>
+                    </div>
                 </div>
-
-                {/** モバイル用ナビゲーションドロップダウン */}
                 <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
-                        " sm:hidden"
+                        " sm:hidden text-right"
                     }
                 >
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
-                        >
-                            マイカード
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route("send-card")}>
-                            マイカードを渡す
-                        </ResponsiveNavLink>
+                    <div className="pt-2 pb-3 space-y-1 inline-block">
                         <ResponsiveNavLink href={route("profile.edit")}>
-                            プロフィールを編集
+                            マイカードを編集
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href={route("public.profile", {
-                                unique_token: user.unique_token,
-                            })}
-                        >
-                            Public
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route("users.index")}>
-                            ユーザー一覧
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            method="post"
                             href={route("logout")}
+                            method="post"
                             as="button"
                         >
                             ログアウト
@@ -203,7 +116,6 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
             </nav>
-
             {header && (
                 <header className="bg-white shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -211,7 +123,6 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </header>
             )}
-
             <main>{children}</main>
         </div>
     );

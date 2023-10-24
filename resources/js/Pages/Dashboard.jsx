@@ -13,11 +13,11 @@ export default function dashboard({ auth, userDetails = {}, user }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    マイカード
-                </h2>
-            }
+            // header={
+            //     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+            //         マイカード
+            //     </h2>
+            // }
         >
             <Head title="マイカード" />
 
@@ -177,18 +177,6 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                             </p>
                         )}
                     </div>
-                </div>
-                <div className="mt-8 text-center">
-                    <p className="mb-4">マイカードを渡す</p>
-                    <QRCode
-                        value={
-                            user &&
-                            route("public.profile", {
-                                unique_token: user.unique_token,
-                            })
-                        }
-                        size={128}
-                    />
                 </div>
             </div>
         </AuthenticatedLayout>
