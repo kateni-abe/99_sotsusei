@@ -332,7 +332,10 @@ export default function UpdateUserDetailsForm({ className = "" }) {
 
                 {/* facebook */}
                 <div>
-                    <InputLabel htmlFor="facebook_account" value="facebook" />
+                    <InputLabel
+                        htmlFor="facebook_account"
+                        value="facebook（https://www.facebook.com/ここのIDを記入してください）"
+                    />
                     <TextInput
                         id="facebook_account"
                         className="mt-1 block w-full"
@@ -358,7 +361,10 @@ export default function UpdateUserDetailsForm({ className = "" }) {
 
                 {/* Instagram */}
                 <div>
-                    <InputLabel htmlFor="instagram_account" value="Instagram" />
+                    <InputLabel
+                        htmlFor="instagram_account"
+                        value="Instagram （https://www.instagram.com/ここのIDを記入してください）"
+                    />
                     <TextInput
                         id="instagram_account"
                         className="mt-1 block w-full"
@@ -387,7 +393,10 @@ export default function UpdateUserDetailsForm({ className = "" }) {
 
                 {/* X */}
                 <div>
-                    <InputLabel htmlFor="x_account" value="X(twitter)" />
+                    <InputLabel
+                        htmlFor="x_account"
+                        value="X(twitter) （https://twitter.com/ここのIDを記入してください）"
+                    />
                     <TextInput
                         id="x_account"
                         className="mt-1 block w-full"

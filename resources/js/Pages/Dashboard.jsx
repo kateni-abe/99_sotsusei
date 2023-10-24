@@ -11,28 +11,28 @@ export default function dashboard({ auth, userDetails = {}, user }) {
     const hasPublicDetails = publicDetailsKeys.length > 0;
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            // header={
-            //     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-            //         マイカード
-            //     </h2>
-            // }
-        >
-            <Head title="マイカード" />
+        <AuthenticatedLayout user={auth.user}>
+            <Head title="マイカード">
+                <style>{`
+                    body, h2, label, p {
+                        font-family: 'Noto Sans JP', sans-serif;
+                    }
+                    a {
+                        color: rgb(0, 64, 141);
+                    }
+                `}</style>
+            </Head>
 
             <div className="py-12 flex justify-center">
                 <div className="w-[360px] bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-col items-center p-8">
-                    <h2 className="text-2xl mb-4 font-['Inter']">
-                        {auth.user.name}
-                    </h2>
+                    <h2 className="text-2xl mb-4">{auth.user.name}</h2>
 
                     <div className="w-[300px] border border-zinc-500 rounded-[5px] p-4 flex flex-col space-y-4">
                         {hasPublicDetails ? (
                             <>
                                 {userDetails.mobile_number_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             携帯番号
                                         </label>
 
@@ -42,7 +42,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 {userDetails.telephone_number_public ==
                                     true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             電話番号
                                         </label>
 
@@ -54,7 +54,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
 
                                 {userDetails.birthdate_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             生年月日
                                         </label>
                                         <div> {userDetails.birthdate}</div>
@@ -62,7 +62,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.birthplace_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             出身地
                                         </label>
                                         <div> {userDetails.birthplace}</div>
@@ -70,7 +70,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.company_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             会社名
                                         </label>
                                         <div>{userDetails.company}</div>{" "}
@@ -78,7 +78,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.position_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             役職
                                         </label>
                                         <div>{userDetails.position}</div>
@@ -86,7 +86,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.industry_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             業種
                                         </label>
                                         <div>{userDetails.industry}</div>
@@ -94,7 +94,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.hobby_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             趣味
                                         </label>
                                         <div>{userDetails.hobby}</div>
@@ -102,7 +102,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.strengths_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             得意なこと
                                         </label>
                                         <div>{userDetails.strengths}</div>
@@ -110,7 +110,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.weaknesses_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             苦手なこと
                                         </label>
 
@@ -120,7 +120,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 {userDetails.facebook_account_public ==
                                     true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             Facebook
                                         </label>
                                         <div>
@@ -131,7 +131,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 {userDetails.instagram_account_public ==
                                     true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             Instagram:{" "}
                                         </label>
                                         <div>
@@ -141,7 +141,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.x_account_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             Twitter:
                                         </label>
                                         <div>{userDetails.x_account}</div>
@@ -149,7 +149,7 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                                 )}
                                 {userDetails.line_id_public == true && (
                                     <div>
-                                        <label className="text-[10px] font-['Inter']">
+                                        <label className="text-[10px]">
                                             LINE ID:
                                         </label>
                                         <div>{userDetails.line_id}</div>

@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import { Helmet } from "react-helmet";
 
-//mui ボタンの設定
 const BlackButton = styled(Button)({
     boxShadow: "none",
     textTransform: "none",
@@ -11,18 +11,7 @@ const BlackButton = styled(Button)({
     padding: "6px 30px",
     lineHeight: 1.5,
     backgroundColor: "black",
-    fontFamily: [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-    ].join(","),
+    fontFamily: "'Noto Sans JP', sans-serif",
     "&:hover": {
         backgroundColor: "#555555",
         boxShadow: "none",
@@ -46,7 +35,7 @@ export default function Public({ user, userDetails = {} }) {
 
     const createVCard = () => {
         let vCardStr = "BEGIN:VCARD\nVERSION:3.0\n";
-        vCardStr += `FN:${user.name}\n`; // 名前の中の・を変更しないように
+        vCardStr += `FN:${user.name}\n`;
 
         if (userDetails.mobile_number_public) {
             vCardStr += `TEL;TYPE=CELL:${userDetails.mobile_number}\n`;
@@ -60,7 +49,16 @@ export default function Public({ user, userDetails = {} }) {
             vCardStr += `EMAIL:${userDetails.email}\n`;
         }
 
-        // 一般的な情報以外をNOTEタグに追加
+        if (userDetails.facebook_account_public) {
+            vCardStr += `URL:https://www.facebook.com/${userDetails.facebook_account}\n`;
+        }
+        if (userDetails.instagram_account_public) {
+            vCardStr += `URL:https://www.instagram.com/${userDetails.instagram_account}\n`;
+        }
+        if (userDetails.x_account_public) {
+            vCardStr += `URL:https://twitter.com/${userDetails.x_account}\n`;
+        }
+
         let notes = [];
         if (userDetails.hobby_public) notes.push("趣味: " + userDetails.hobby);
         if (userDetails.strengths_public)
@@ -68,7 +66,7 @@ export default function Public({ user, userDetails = {} }) {
         if (userDetails.weaknesses_public)
             notes.push("苦手なこと: " + userDetails.weaknesses);
         if (notes.length > 0) {
-            vCardStr += `NOTE:${notes.join("\\n")}\n`; // \nで改行
+            vCardStr += `NOTE:${notes.join("\\n")}\n`;
         }
 
         vCardStr += "END:VCARD";
@@ -89,6 +87,26 @@ export default function Public({ user, userDetails = {} }) {
 
     return (
         <div className="bg-custom-gray min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <Helmet>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap"
+                    rel="stylesheet"
+                />
+                <style type="text/css">{`
+                    body {
+                        font-family: 'Noto Sans JP', sans-serif;
+                    }
+                    .text-color-action {
+                        color: rgb(0, 64, 141);
+                    }
+                `}</style>
+            </Helmet>
             <div className="max-w-md w-full space-y-8">
                 <h1 className="text-center text-2xl font-bold">{user.name}</h1>
                 <div className="space-y-4">
@@ -96,7 +114,7 @@ export default function Public({ user, userDetails = {} }) {
                         <>
                             {userDetails.mobile_number_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         携帯番号
                                     </label>
 
@@ -104,6 +122,7 @@ export default function Public({ user, userDetails = {} }) {
                                         {" "}
                                         <a
                                             href={`tel:${userDetails.mobile_number}`}
+                                            style={{ color: "rgb(0, 64, 141)" }}
                                         >
                                             {userDetails.mobile_number}
                                         </a>
@@ -112,13 +131,14 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.telephone_number_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         電話番号
                                     </label>
 
                                     <div>
                                         <a
                                             href={`tel:${userDetails.telephone_number}`}
+                                            style={{ color: "rgb(0, 64, 141)" }}
                                         >
                                             {userDetails.telephone_number}
                                         </a>
@@ -128,7 +148,7 @@ export default function Public({ user, userDetails = {} }) {
 
                             {userDetails.birthdate_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         生年月日
                                     </label>
                                     <div> {userDetails.birthdate}</div>
@@ -136,7 +156,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.birthplace_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         出身地
                                     </label>
                                     <div> {userDetails.birthplace}</div>
@@ -144,7 +164,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.company_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         会社名
                                     </label>
                                     <div>{userDetails.company}</div>{" "}
@@ -152,7 +172,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.position_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         役職
                                     </label>
                                     <div>{userDetails.position}</div>
@@ -160,7 +180,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.industry_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         業種
                                     </label>
                                     <div>{userDetails.industry}</div>
@@ -168,7 +188,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.hobby_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         趣味
                                     </label>
                                     <div>{userDetails.hobby}</div>
@@ -176,7 +196,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.strengths_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         得意なこと
                                     </label>
                                     <div>{userDetails.strengths}</div>
@@ -184,7 +204,7 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.weaknesses_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         苦手なこと
                                     </label>
 
@@ -193,31 +213,56 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                             {userDetails.facebook_account_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         Facebook
                                     </label>
-                                    <div>{userDetails.facebook_account}</div>
+                                    <div>
+                                        <a
+                                            href={`https://www.facebook.com/${userDetails.facebook_account}`}
+                                            style={{ color: "rgb(0, 64, 141)" }}
+                                            target="_blank"
+                                        >
+                                            {userDetails.facebook_account}
+                                        </a>
+                                    </div>
                                 </div>
                             )}
                             {userDetails.instagram_account_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         Instagram:{" "}
                                     </label>
-                                    <div>{userDetails.instagram_account}</div>
+                                    <div>
+                                        <a
+                                            href={`https://www.instagram.com/${userDetails.instagram_account}`}
+                                            style={{ color: "rgb(0, 64, 141)" }}
+                                            target="_blank"
+                                        >
+                                            {userDetails.instagram_account}
+                                        </a>
+                                    </div>
                                 </div>
                             )}
                             {userDetails.x_account_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         Twitter:
                                     </label>
-                                    <div>{userDetails.x_account}</div>
+                                    <div>
+                                        <a
+                                            href={`https://twitter.com/${userDetails.x_account}`}
+                                            style={{ color: "rgb(0, 64, 141)" }}
+                                            target="_blank"
+                                        >
+                                            {userDetails.x_account}
+                                        </a>
+                                    </div>
                                 </div>
                             )}
+
                             {userDetails.line_id_public == true && (
                                 <div>
-                                    <label className="text-[10px] font-['Inter']">
+                                    <label className="text-[10px] font-['Noto Sans JP']">
                                         LINE ID:
                                     </label>
                                     <div>{userDetails.line_id}</div>
@@ -225,12 +270,11 @@ export default function Public({ user, userDetails = {} }) {
                             )}
                         </>
                     ) : (
-                        <p className="text-center">
+                        <p className="text-center font-['Noto Sans JP']">
                             このユーザーは公開情報を設定していません。
                         </p>
                     )}
                 </div>
-                {/* vCardダウンロードボタンを更新 */}
                 <div className="mt-4 flex justify-center">
                     <BlackButton
                         variant="contained"
