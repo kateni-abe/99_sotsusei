@@ -1,7 +1,9 @@
+import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import QRCode from "qrcode.react";
 
-export default function dashboard({ auth, userDetails = {} }) {
+export default function dashboard({ auth, userDetails = {}, user }) {
     const publicDetailsKeys = Object.keys(userDetails).filter(
         (key) => key.endsWith("_public") && userDetails[key]
     );
@@ -175,6 +177,18 @@ export default function dashboard({ auth, userDetails = {} }) {
                             </p>
                         )}
                     </div>
+                </div>
+                <div className="mt-8 text-center">
+                    <p className="mb-4">マイカードを渡す</p>
+                    <QRCode
+                        value={
+                            user &&
+                            route("public.profile", {
+                                unique_token: user.unique_token,
+                            })
+                        }
+                        size={128}
+                    />
                 </div>
             </div>
         </AuthenticatedLayout>

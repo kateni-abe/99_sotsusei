@@ -77,7 +77,7 @@ export default function Public({ user, userDetails = {} }) {
     };
 
     return (
-        <div className="bg-custom-gray min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="bg-custom-gray min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <h1 className="text-center text-2xl font-bold">{user.name}</h1>
                 <div className="space-y-4">
@@ -151,7 +151,7 @@ export default function Public({ user, userDetails = {} }) {
                     )}
                 </div>
                 {/* vCardダウンロードボタンを更新 */}
-                <div className="mt-4">
+                <div className="mt-4 flex justify-center">
                     <BlackButton
                         variant="contained"
                         onClick={handleVCardDownload}
