@@ -5,7 +5,7 @@ export default function Welcome({ auth }) {
             <Head title="Welcome" />
 
             {/* メインコンテナ */}
-            <div className="relative flex flex-col items-center justify-center min-h-screen bg-dots-darker bg-center bg-your-color-class dark:bg-your-dark-color-class dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+            <div className="relative flex flex-col items-center justify-center min-h-screen bg-white selection:bg-red-500 selection:text-white">
                 {/* タイトルエリア */}
                 <Typography
                     variant="h2"
