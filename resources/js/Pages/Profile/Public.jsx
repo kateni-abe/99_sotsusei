@@ -46,7 +46,7 @@ export default function Public({ user, userDetails = {} }) {
 
     const createVCard = () => {
         let vCardStr = "BEGIN:VCARD\nVERSION:3.0\n";
-        vCardStr += `FN:${user.name}\n`;
+        vCardStr += `FN:${user.name}\n`; // 名前の中の・を変更しないように
 
         if (userDetails.mobile_number_public) {
             vCardStr += `TEL;TYPE=CELL:${userDetails.mobile_number}\n`;
@@ -58,6 +58,17 @@ export default function Public({ user, userDetails = {} }) {
 
         if (userDetails.email_public) {
             vCardStr += `EMAIL:${userDetails.email}\n`;
+        }
+
+        // 一般的な情報以外をNOTEタグに追加
+        let notes = [];
+        if (userDetails.hobby_public) notes.push("趣味: " + userDetails.hobby);
+        if (userDetails.strengths_public)
+            notes.push("得意なこと: " + userDetails.strengths);
+        if (userDetails.weaknesses_public)
+            notes.push("苦手なこと: " + userDetails.weaknesses);
+        if (notes.length > 0) {
+            vCardStr += `NOTE:${notes.join("\\n")}\n`; // \nで改行
         }
 
         vCardStr += "END:VCARD";
@@ -83,65 +94,134 @@ export default function Public({ user, userDetails = {} }) {
                 <div className="space-y-4">
                     {hasPublicDetails ? (
                         <>
-                            {userDetails.mobile_number_public && (
+                            {userDetails.mobile_number_public == true && (
                                 <div>
-                                    携帯番号:{" "}
-                                    <a
-                                        href={`tel:${userDetails.mobile_number}`}
-                                    >
-                                        {userDetails.mobile_number}
-                                    </a>
+                                    <label className="text-[10px] font-['Inter']">
+                                        携帯番号
+                                    </label>
+
+                                    <div>
+                                        {" "}
+                                        <a
+                                            href={`tel:${userDetails.mobile_number}`}
+                                        >
+                                            {userDetails.mobile_number}
+                                        </a>
+                                    </div>
                                 </div>
                             )}
-                            {userDetails.telephone_number_public && (
+                            {userDetails.telephone_number_public == true && (
                                 <div>
-                                    電話番号:{" "}
-                                    <a
-                                        href={`tel:${userDetails.telephone_number}`}
-                                    >
-                                        {userDetails.telephone_number}
-                                    </a>
+                                    <label className="text-[10px] font-['Inter']">
+                                        電話番号
+                                    </label>
+
+                                    <div>
+                                        <a
+                                            href={`tel:${userDetails.telephone_number}`}
+                                        >
+                                            {userDetails.telephone_number}
+                                        </a>
+                                    </div>
                                 </div>
                             )}
-                            {userDetails.birthdate_public && (
-                                <div>生年月日: {userDetails.birthdate}</div>
-                            )}
-                            {userDetails.birthplace_public && (
-                                <div>出身地: {userDetails.birthplace}</div>
-                            )}
-                            {userDetails.company_public && (
-                                <div>会社名: {userDetails.company}</div>
-                            )}
-                            {userDetails.position_public && (
-                                <div>役職: {userDetails.position}</div>
-                            )}
-                            {userDetails.industry_public && (
-                                <div>業種: {userDetails.industry}</div>
-                            )}
-                            {userDetails.hobby_public && (
-                                <div>趣味: {userDetails.hobby}</div>
-                            )}
-                            {userDetails.strengths_public && (
-                                <div>得意なこと: {userDetails.strengths}</div>
-                            )}
-                            {userDetails.weaknesses_public && (
-                                <div>苦手なこと: {userDetails.weaknesses}</div>
-                            )}
-                            {userDetails.facebook_account_public && (
+
+                            {userDetails.birthdate_public == true && (
                                 <div>
-                                    Facebook: {userDetails.facebook_account}
+                                    <label className="text-[10px] font-['Inter']">
+                                        生年月日
+                                    </label>
+                                    <div> {userDetails.birthdate}</div>
                                 </div>
                             )}
-                            {userDetails.instagram_account_public && (
+                            {userDetails.birthplace_public == true && (
                                 <div>
-                                    Instagram: {userDetails.instagram_account}
+                                    <label className="text-[10px] font-['Inter']">
+                                        出身地
+                                    </label>
+                                    <div> {userDetails.birthplace}</div>
                                 </div>
                             )}
-                            {userDetails.x_account_public && (
-                                <div>Twitter: {userDetails.x_account}</div>
+                            {userDetails.company_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        会社名
+                                    </label>
+                                    <div>{userDetails.company}</div>{" "}
+                                </div>
                             )}
-                            {userDetails.line_id_public && (
-                                <div>LINE ID: {userDetails.line_id}</div>
+                            {userDetails.position_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        役職
+                                    </label>
+                                    <div>{userDetails.position}</div>
+                                </div>
+                            )}
+                            {userDetails.industry_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        業種
+                                    </label>
+                                    <div>{userDetails.industry}</div>
+                                </div>
+                            )}
+                            {userDetails.hobby_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        趣味
+                                    </label>
+                                    <div>{userDetails.hobby}</div>
+                                </div>
+                            )}
+                            {userDetails.strengths_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        得意なこと
+                                    </label>
+                                    <div>{userDetails.strengths}</div>
+                                </div>
+                            )}
+                            {userDetails.weaknesses_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        苦手なこと
+                                    </label>
+
+                                    <div>{userDetails.weaknesses}</div>
+                                </div>
+                            )}
+                            {userDetails.facebook_account_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        Facebook
+                                    </label>
+                                    <div>{userDetails.facebook_account}</div>
+                                </div>
+                            )}
+                            {userDetails.instagram_account_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        Instagram:{" "}
+                                    </label>
+                                    <div>{userDetails.instagram_account}</div>
+                                </div>
+                            )}
+                            {userDetails.x_account_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        Twitter:
+                                    </label>
+                                    <div>{userDetails.x_account}</div>
+                                </div>
+                            )}
+                            {userDetails.line_id_public == true && (
+                                <div>
+                                    <label className="text-[10px] font-['Inter']">
+                                        LINE ID:
+                                    </label>
+                                    <div>{userDetails.line_id}</div>
+                                </div>
                             )}
                         </>
                     ) : (

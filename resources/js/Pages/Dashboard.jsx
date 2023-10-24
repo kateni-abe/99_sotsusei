@@ -30,144 +30,129 @@ export default function dashboard({ auth, userDetails = {}, user }) {
                     <div className="w-[300px] border border-zinc-500 rounded-[5px] p-4 flex flex-col space-y-4">
                         {hasPublicDetails ? (
                             <>
-                                {userDetails.mobile_number_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.mobile_number_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             携帯番号
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.mobile_number}
-                                        </div>
+
+                                        <div> {userDetails.mobile_number}</div>
                                     </div>
                                 )}
-                                {userDetails.telephone_number_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.telephone_number_public ==
+                                    true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             電話番号
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
+
+                                        <div>
                                             {userDetails.telephone_number}
                                         </div>
                                     </div>
                                 )}
-                                {userDetails.birthdate_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+
+                                {userDetails.birthdate_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             生年月日
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.birthdate}
-                                        </div>
+                                        <div> {userDetails.birthdate}</div>
                                     </div>
                                 )}
-                                {userDetails.birthplace_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.birthplace_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             出身地
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.birthplace}
-                                        </div>
+                                        <div> {userDetails.birthplace}</div>
                                     </div>
                                 )}
-                                {userDetails.company_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.company_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             会社名
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.company}
-                                        </div>
+                                        <div>{userDetails.company}</div>{" "}
                                     </div>
                                 )}
-                                {userDetails.position_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.position_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             役職
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.position}
-                                        </div>
+                                        <div>{userDetails.position}</div>
                                     </div>
                                 )}
-                                {userDetails.industry_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.industry_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             業種
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.industry}
-                                        </div>
+                                        <div>{userDetails.industry}</div>
                                     </div>
                                 )}
-                                {userDetails.hobby_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.hobby_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             趣味
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.hobby}
-                                        </div>
+                                        <div>{userDetails.hobby}</div>
                                     </div>
                                 )}
-                                {userDetails.strengths_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.strengths_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             得意なこと
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.strengths}
-                                        </div>
+                                        <div>{userDetails.strengths}</div>
                                     </div>
                                 )}
-                                {userDetails.weaknesses_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.weaknesses_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             苦手なこと
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.weaknesses}
-                                        </div>
+
+                                        <div>{userDetails.weaknesses}</div>
                                     </div>
                                 )}
-                                {userDetails.facebook_account_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
+                                {userDetails.facebook_account_public ==
+                                    true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
                                             Facebook
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
+                                        <div>
                                             {userDetails.facebook_account}
                                         </div>
                                     </div>
                                 )}
-                                {userDetails.instagram_account_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
-                                            Instagram
+                                {userDetails.instagram_account_public ==
+                                    true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
+                                            Instagram:{" "}
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
+                                        <div>
                                             {userDetails.instagram_account}
                                         </div>
                                     </div>
                                 )}
-                                {userDetails.x_account_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
-                                            Twitter
+                                {userDetails.x_account_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
+                                            Twitter:
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.x_account}
-                                        </div>
+                                        <div>{userDetails.x_account}</div>
                                     </div>
                                 )}
-                                {userDetails.line_id_public && (
-                                    <div className="flex flex-col">
-                                        <label className="text-[8px] font-['Inter']">
-                                            LINE ID
+                                {userDetails.line_id_public == true && (
+                                    <div>
+                                        <label className="text-[10px] font-['Inter']">
+                                            LINE ID:
                                         </label>
-                                        <div className="text-[11px] font-['Inter'] tracking-wide">
-                                            {userDetails.line_id}
-                                        </div>
+                                        <div>{userDetails.line_id}</div>
                                     </div>
                                 )}
                             </>
